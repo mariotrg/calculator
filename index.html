@@ -7,8 +7,68 @@
     <title>Calculator</title>
 
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
     <script src="script.js" defer></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+      defer
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+      defer
+    ></script>
   </head>
-  <body></body>
+  <body>
+    <main>
+      <div class="calculator">
+        <div class="display">
+          <div class="upper-display">5 + 5</div>
+          <div class="lower-display">10</div>
+        </div>
+        <div class="buttons-container">
+          <button class="calculator-btn number-btn" value="7">7</button>
+          <button class="calculator-btn number-btn" value="8">8</button>
+          <button class="calculator-btn number-btn" value="9">9</button>
+          <button class="calculator-btn operator-btn" value="+">+</button>
+
+          <button class="calculator-btn number-btn" value="4">4</button>
+          <button class="calculator-btn number-btn" value="5">5</button>
+          <button class="calculator-btn number-btn" value="6">6</button>
+          <button class="calculator-btn operator-btn" value="-">-</button>
+
+          <button class="calculator-btn number-btn" value="1">1</button>
+          <button class="calculator-btn number-btn" value="2">2</button>
+          <button class="calculator-btn number-btn" value="3">3</button>
+          <button class="calculator-btn operator-btn" value="*">*</button>
+
+          <button class="calculator-btn number-btn comma-btn" value=".">
+            .
+          </button>
+          <button class="calculator-btn number-btn" value="0">0</button>
+          <button class="calculator-btn remove-btn delete-btn" value="del">
+            <ion-icon name="backspace-outline"></ion-icon>
+          </button>
+          <button class="calculator-btn operator-btn" value="/">/</button>
+
+          <button
+            class="calculator-btn remove-btn clear-btn grid-span--2"
+            value="cls"
+          >
+            CLEAR
+          </button>
+          <button class="calculator-btn equals-btn grid-span--2" value="eq">
+            =
+          </button>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
