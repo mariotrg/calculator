@@ -75,11 +75,13 @@ main {
 
 .upper-display {
   font-size: 2.4rem;
+  height: 3rem;
   margin-bottom: 1.2rem;
 }
 
 .lower-display {
   font-size: 4.4rem;
+  height: 5rem;
 }
 
 /* Buttons */
