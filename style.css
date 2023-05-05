@@ -1,1 +1,150 @@
+:root {
+  --main-bg: hsl(222, 26%, 31%);
+  --display-bg: hsl(224, 36%, 15%);
+  --display-color: hsl(0, 0%, 100%);
+  --container-bg: hsl(223, 31%, 20%);
+  --number-btn-bg: hsl(30, 25%, 89%);
+  --number-btn-color: hsl(221, 14%, 31%);
+  --number-btn-shadow: hsl(28, 16%, 65%);
+  --operator-btn-bg: hsl(30, 25%, 89%);
+  --operator-btn-color: hsl(221, 14%, 31%);
+  --operator-btn-shadow: hsl(28, 16%, 65%);
+  --equals-btn-bg: hsl(6, 63%, 50%);
+  --equals-btn-color: hsl(0, 0%, 100%);
+  --equals-btn-shadow: hsl(6, 70%, 34%);
+  --remove-btn-bg: hsl(225, 21%, 49%);
+  --remove-btn-color: hsl(0, 0%, 100%);
+  --remove-btn-shadow: hsl(224, 28%, 35%);
+}
 
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  font-family: "Roboto", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* COMMON STYLING */
+.grid-span--2 {
+  grid-column: span 2 / span 2;
+}
+
+/* MAIN */
+main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+/* CALCULATOR */
+.calculator {
+  flex: 1;
+  max-width: 54rem;
+  padding: 3rem 2rem;
+  background-color: var(--main-bg);
+  border-radius: 10px;
+}
+
+/* Display */
+.display {
+  height: 12rem;
+  padding: 1.4rem;
+  margin-bottom: 2.4rem;
+  background-color: var(--display-bg);
+  color: var(--display-color);
+  border-radius: 10px;
+  text-align: right;
+}
+
+.upper-display {
+  font-size: 2.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.lower-display {
+  font-size: 4.4rem;
+}
+
+/* Buttons */
+.buttons-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.4rem;
+  background-color: var(--container-bg);
+  padding: 2.4rem 1.4rem;
+  border-radius: 10px;
+}
+
+.calculator-btn {
+  padding: 1rem 0;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+}
+
+.number-btn,
+.operator-btn,
+.delete-btn {
+  font-size: 3.2rem;
+}
+
+.equals-btn,
+.clear-btn {
+  font-size: 2.8rem;
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.number-btn {
+  background-color: var(--number-btn-bg);
+  box-shadow: 0px 5px var(--number-btn-shadow);
+  color: var(--number-btn-color);
+}
+
+.operator-btn {
+  background-color: var(--operator-btn-bg);
+  box-shadow: 0px 5px var(--operator-btn-shadow);
+  color: var(--operator-btn-color);
+}
+
+.equals-btn {
+  background-color: var(--equals-btn-bg);
+  box-shadow: 0px 5px var(--equals-btn-shadow);
+  color: var(--equals-btn-color);
+}
+
+.remove-btn {
+  background-color: var(--remove-btn-bg);
+  box-shadow: 0px 5px var(--remove-btn-shadow);
+  color: var(--remove-btn-color);
+}
+
+.number-btn:hover,
+.operator-btn:hover,
+.remove-btn:hover,
+.equals-btn:hover {
+  filter: brightness(120%);
+  transition: filter 0.3s ease;
+  cursor: pointer;
+}
