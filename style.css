@@ -57,9 +57,10 @@ main {
 .calculator {
   flex: 1;
   max-width: 54rem;
-  padding: 3rem 2rem;
+  padding: 3rem;
   background-color: var(--main-bg);
   border-radius: 10px;
+  box-shadow: 0 3px 15px 0px var(--display-bg);
 }
 
 /* Display */
