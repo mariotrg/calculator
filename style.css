@@ -105,7 +105,8 @@ main {
 
 .number-btn,
 .operator-btn,
-.delete-btn {
+.delete-btn,
+.comma-btn {
   font-size: 3.2rem;
 }
 
@@ -120,7 +121,8 @@ main {
   justify-content: center;
 }
 
-.number-btn {
+.number-btn,
+.comma-btn {
   background-color: var(--number-btn-bg);
   box-shadow: 0px 5px var(--number-btn-shadow);
   color: var(--number-btn-color);
@@ -147,7 +149,8 @@ main {
 .number-btn:hover,
 .operator-btn:hover,
 .remove-btn:hover,
-.equals-btn:hover {
+.equals-btn:hover,
+.comma-btn:hover {
   filter: brightness(120%);
   transition: filter 0.3s ease;
   cursor: pointer;
