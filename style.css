@@ -72,6 +72,7 @@ main {
   color: var(--display-color);
   border-radius: 10px;
   text-align: right;
+  overflow: hidden;
 }
 
 .upper-display {
@@ -105,8 +106,7 @@ main {
 
 .number-btn,
 .operator-btn,
-.delete-btn,
-.comma-btn {
+.delete-btn {
   font-size: 3.2rem;
 }
 
@@ -121,8 +121,7 @@ main {
   justify-content: center;
 }
 
-.number-btn,
-.comma-btn {
+.number-btn {
   background-color: var(--number-btn-bg);
   box-shadow: 0px 5px var(--number-btn-shadow);
   color: var(--number-btn-color);
@@ -149,8 +148,7 @@ main {
 .number-btn:hover,
 .operator-btn:hover,
 .remove-btn:hover,
-.equals-btn:hover,
-.comma-btn:hover {
+.equals-btn:hover {
   filter: brightness(120%);
   transition: filter 0.3s ease;
   cursor: pointer;
