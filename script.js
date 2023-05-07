@@ -77,12 +77,17 @@ function clear() {
   secondOperand = "";
   result = "";
   operator = "";
-  upperDisplay.textContent = "";
-  lowerDisplay.textContent = 0;
+  updateDisplay();
 }
 
 function appendNumber(e) {
-  if (result !== "") return;
+  if (result !== "") {
+    firstOperand = "";
+    secondOperand = "";
+    result = "";
+    operator = "";
+  }
+
   if (secondOperand.includes(".") && e.target.value === ".") {
     return;
   } else if (
@@ -105,19 +110,8 @@ function appendNumber(e) {
 }
 
 function updateDisplay() {
-  if (!operator) lowerDisplay.textContent = `${firstOperand}`;
-  if (operator) {
-    upperDisplay.textContent = `${firstOperand} ${operator}`;
-    lowerDisplay.textContent = `${secondOperand}`;
-  }
-  if (result !== "") {
-    upperDisplay.textContent = `${firstOperand} ${operator} ${secondOperand}`;
-    lowerDisplay.textContent = `${result}`;
-  }
-  if (operator === "" && firstOperand !== "") {
-    upperDisplay.textContent = "";
-    lowerDisplay.textContent = `${firstOperand}`;
-  }
+  upperDisplay.textContent = `${firstOperand} ${operator} ${secondOperand}`;
+  lowerDisplay.textContent = `${result}`;
 }
 
 function add(num1, num2) {
