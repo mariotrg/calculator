@@ -1,12 +1,14 @@
 let firstOperand = "";
 let secondOperand = "";
-let operator;
-let result;
-let current;
+let operator = "";
+let result = "";
+let decimalAllowed = true;
 
 const numberBtn = document.querySelectorAll(".number-btn");
 const operatorBtn = document.querySelectorAll(".operator-btn");
 const equalsBtn = document.querySelector(".equals-btn");
+const deleteBtn = document.querySelector(".delete-btn");
+const clearBtn = document.querySelector(".clear-btn");
 const upperDisplay = document.querySelector(".upper-display");
 const lowerDisplay = document.querySelector(".lower-display");
 
@@ -19,41 +21,87 @@ for (const button of numberBtn) {
 
 for (const button of operatorBtn) {
   button.addEventListener("click", (e) => {
-    if (firstOperand && secondOperand && operator) {
-      result =
+    if (firstOperand !== "" && secondOperand !== "" && operator !== "") {
+      result = (
         Math.round(
-          operate(operator, Number(firstOperand), Number(secondOperand)) * 100
-        ) / 100;
+          operate(operator, Number(firstOperand), Number(secondOperand)) * 1000
+        ) / 1000
+      ).toString();
+      updateDisplay();
+      firstOperand = result;
+      result = "";
+      secondOperand = "";
+    }
+    if (result !== "") {
       firstOperand = result;
       result = "";
       secondOperand = "";
       updateDisplay();
     }
     operator = e.target.value;
-    if (result) {
-      firstOperand = result;
-      result = "";
-      secondOperand = "";
-      updateDisplay();
-    }
     updateDisplay();
   });
 }
 
 equalsBtn.addEventListener("click", (e) => {
-  if (!operator) return false;
-  if (firstOperand === "") firstOperand = 0;
-  if (secondOperand === "") secondOperand = 0;
-  result =
+  if (operator === "") return false;
+  if (firstOperand === "") firstOperand = "0";
+  if (secondOperand === "") secondOperand = "0";
+  result = (
     Math.round(
-      operate(operator, Number(firstOperand), Number(secondOperand)) * 100
-    ) / 100;
+      operate(operator, Number(firstOperand), Number(secondOperand)) * 1000
+    ) / 1000
+  ).toString();
   updateDisplay();
 });
 
+deleteBtn.addEventListener("click", () => {
+  if (firstOperand !== "" && operator === "") {
+    firstOperand = firstOperand.slice(0, -1);
+    updateDisplay();
+  } else if (secondOperand !== "" && operator !== "" && result === "") {
+    secondOperand = secondOperand.slice(0, -1);
+    updateDisplay();
+  } else if (operator !== "" && secondOperand === "") {
+    operator = operator.slice(0, -1);
+    updateDisplay();
+  }
+});
+
+clearBtn.addEventListener("click", (e) => {
+  clear();
+});
+
+function clear() {
+  firstOperand = "";
+  secondOperand = "";
+  result = "";
+  operator = "";
+  upperDisplay.textContent = "";
+  lowerDisplay.textContent = 0;
+}
+
 function appendNumber(e) {
-  if (!operator) firstOperand += e.target.value;
-  if (operator) secondOperand += e.target.value;
+  if (result !== "") return;
+  if (secondOperand.includes(".") && e.target.value === ".") {
+    return;
+  } else if (
+    operator !== "" &&
+    secondOperand === "" &&
+    e.target.value === "."
+  ) {
+    secondOperand += `0${e.target.value}`;
+  } else {
+    if (operator !== "") secondOperand += e.target.value;
+  }
+
+  if (firstOperand.includes(".") && e.target.value === "." && operator === "") {
+    return;
+  } else if (operator === "" && firstOperand === "" && e.target.value === ".") {
+    firstOperand += `0${e.target.value}`;
+  } else {
+    if (operator === "") firstOperand += e.target.value;
+  }
 }
 
 function updateDisplay() {
@@ -62,9 +110,13 @@ function updateDisplay() {
     upperDisplay.textContent = `${firstOperand} ${operator}`;
     lowerDisplay.textContent = `${secondOperand}`;
   }
-  if (result) {
+  if (result !== "") {
     upperDisplay.textContent = `${firstOperand} ${operator} ${secondOperand}`;
     lowerDisplay.textContent = `${result}`;
+  }
+  if (operator === "" && firstOperand !== "") {
+    upperDisplay.textContent = "";
+    lowerDisplay.textContent = `${firstOperand}`;
   }
 }
 
@@ -81,6 +133,7 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
+  if (num1 === 0 || num2 === 0) return 0;
   return num1 / num2;
 }
 
