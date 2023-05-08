@@ -11,25 +11,26 @@ let previousOperand = "";
 let operator = "";
 let result = "";
 
-numberBtn.forEach((number) => {
-  number.addEventListener("click", (e) => {
-    let num = e.target.value;
+numberBtn.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const num = e.target.value;
     appendNumber(num);
     updateDisplay();
   });
 });
 
-operatorBtn.forEach((operator) => {
-  operator.addEventListener("click", (e) => {
-    let sign = e.target.value;
-    handleOperatorClick(sign);
+operatorBtn.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const sign = e.target.value;
+    chooseOperation(sign);
     updateDisplay();
   });
 });
 
 equalsBtn.addEventListener("click", (e) => {
   if (operator === "") return;
-  result = calculate();
+  if (currentOperand === "") return;
+  calculate();
   updateDisplay();
 });
 
@@ -45,33 +46,24 @@ clearBtn.addEventListener("click", (e) => {
 
 function appendNumber(number) {
   if (result !== "") clear();
+
   if (number === "." && currentOperand.includes(".")) return;
   if (currentOperand === "" && number === ".") currentOperand = 0;
   currentOperand += number.toString();
 }
 
-function appendOperator(sign) {
-  operator = sign;
-}
-
-function handleOperatorClick(sign) {
+function chooseOperation(sign) {
   if (currentOperand === "") return;
-  if (operator !== "" && currentOperand === "") {
-    appendOperator(sign);
-    return;
+  if (previousOperand !== "") {
+    calculate();
+    currentOperand = result;
+    operator = "";
+    previousOperand = "";
+    result = "";
   }
-  if (operator === "") {
-    previousOperand = currentOperand;
-    currentOperand = "";
-    appendOperator(sign);
-    return;
-  }
-
-  result = calculate();
-  previousOperand = result.toString();
-  result = "";
+  operator = sign;
+  previousOperand = currentOperand;
   currentOperand = "";
-  appendOperator(sign);
 }
 
 function updateDisplay() {
@@ -80,6 +72,8 @@ function updateDisplay() {
 }
 
 function remove() {
+  currentOperand = currentOperand.toString();
+
   if (result !== "") return;
   if (currentOperand === "") {
     operator = operator.slice(0, -1);
@@ -115,23 +109,26 @@ function divide(a, b) {
 }
 
 function calculate() {
-  return (
-    Math.round(operate(operator, previousOperand, currentOperand) * 1000) / 1000
-  );
-}
-
-function operate(operator, a, b) {
-  a = Number(a);
-  b = Number(b);
+  const previous = Number(previousOperand);
+  const current = Number(currentOperand);
+  if (isNaN(previous) || isNaN(current)) return;
 
   switch (operator) {
     case "+":
-      return add(a, b);
+      result = add(previous, current);
+      break;
     case "-":
-      return substract(a, b);
+      result = substract(previous, current);
+      break;
     case "*":
-      return multiply(a, b);
+      result = multiply(previous, current);
+      break;
     case "/":
-      return divide(a, b);
+      result = divide(previous, current);
+      break;
+    default:
+      return;
   }
+
+  return (result = Math.round(result * 1000) / 1000);
 }
