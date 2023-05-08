@@ -1,9 +1,3 @@
-let firstOperand = "";
-let secondOperand = "";
-let operator = "";
-let result = "";
-let decimalAllowed = true;
-
 const numberBtn = document.querySelectorAll(".number-btn");
 const operatorBtn = document.querySelectorAll(".operator-btn");
 const equalsBtn = document.querySelector(".equals-btn");
@@ -12,134 +6,128 @@ const clearBtn = document.querySelector(".clear-btn");
 const upperDisplay = document.querySelector(".upper-display");
 const lowerDisplay = document.querySelector(".lower-display");
 
-for (const button of numberBtn) {
-  button.addEventListener("click", (e) => {
-    appendNumber(e);
-    updateDisplay();
-  });
-}
+let currentOperand = "";
+let previousOperand = "";
+let operator = "";
+let result = "";
 
-for (const button of operatorBtn) {
-  button.addEventListener("click", (e) => {
-    if (firstOperand !== "" && secondOperand !== "" && operator !== "") {
-      result = (
-        Math.round(
-          operate(operator, Number(firstOperand), Number(secondOperand)) * 1000
-        ) / 1000
-      ).toString();
-      updateDisplay();
-      firstOperand = result;
-      result = "";
-      secondOperand = "";
-    }
-    if (result !== "") {
-      firstOperand = result;
-      result = "";
-      secondOperand = "";
-      updateDisplay();
-    }
-    operator = e.target.value;
+numberBtn.forEach((number) => {
+  number.addEventListener("click", (e) => {
+    let num = e.target.value;
+    appendNumber(num);
     updateDisplay();
   });
-}
+});
+
+operatorBtn.forEach((operator) => {
+  operator.addEventListener("click", (e) => {
+    let sign = e.target.value;
+    handleOperatorClick(sign);
+    updateDisplay();
+  });
+});
 
 equalsBtn.addEventListener("click", (e) => {
-  if (operator === "") return false;
-  if (firstOperand === "") firstOperand = "0";
-  if (secondOperand === "") secondOperand = "0";
-  result = (
-    Math.round(
-      operate(operator, Number(firstOperand), Number(secondOperand)) * 1000
-    ) / 1000
-  ).toString();
+  if (operator === "") return;
+  result = calculate();
   updateDisplay();
 });
 
-deleteBtn.addEventListener("click", () => {
-  if (firstOperand !== "" && operator === "") {
-    firstOperand = firstOperand.slice(0, -1);
-    updateDisplay();
-  } else if (secondOperand !== "" && operator !== "" && result === "") {
-    secondOperand = secondOperand.slice(0, -1);
-    updateDisplay();
-  } else if (operator !== "" && secondOperand === "") {
-    operator = operator.slice(0, -1);
-    updateDisplay();
-  }
+deleteBtn.addEventListener("click", (e) => {
+  remove();
+  updateDisplay();
 });
 
 clearBtn.addEventListener("click", (e) => {
   clear();
+  updateDisplay();
 });
 
-function clear() {
-  firstOperand = "";
-  secondOperand = "";
-  result = "";
-  operator = "";
-  updateDisplay();
+function appendNumber(number) {
+  if (result !== "") clear();
+  if (number === "." && currentOperand.includes(".")) return;
+  if (currentOperand === "" && number === ".") currentOperand = 0;
+  currentOperand += number.toString();
 }
 
-function appendNumber(e) {
-  if (result !== "") {
-    firstOperand = "";
-    secondOperand = "";
-    result = "";
-    operator = "";
+function appendOperator(sign) {
+  operator = sign;
+}
+
+function handleOperatorClick(sign) {
+  if (currentOperand === "") return;
+  if (operator === "") {
+    previousOperand = currentOperand;
+    currentOperand = "";
+    appendOperator(sign);
+    return;
   }
 
-  if (secondOperand.includes(".") && e.target.value === ".") {
-    return;
-  } else if (
-    operator !== "" &&
-    secondOperand === "" &&
-    e.target.value === "."
-  ) {
-    secondOperand += `0${e.target.value}`;
-  } else {
-    if (operator !== "") secondOperand += e.target.value;
-  }
-
-  if (firstOperand.includes(".") && e.target.value === "." && operator === "") {
-    return;
-  } else if (operator === "" && firstOperand === "" && e.target.value === ".") {
-    firstOperand += `0${e.target.value}`;
-  } else {
-    if (operator === "") firstOperand += e.target.value;
-  }
+  result = calculate();
+  previousOperand = result.toString();
+  result = "";
+  currentOperand = "";
+  appendOperator(sign);
 }
 
 function updateDisplay() {
-  upperDisplay.textContent = `${firstOperand} ${operator} ${secondOperand}`;
+  upperDisplay.textContent = `${previousOperand} ${operator} ${currentOperand}`;
   lowerDisplay.textContent = `${result}`;
 }
 
-function add(num1, num2) {
-  return num1 + num2;
+function remove() {
+  if (result !== "") return;
+  if (currentOperand === "") {
+    operator = operator.slice(0, -1);
+    currentOperand = previousOperand;
+    previousOperand = "";
+    return;
+  }
+  currentOperand = currentOperand.slice(0, -1);
 }
 
-function substract(num1, num2) {
-  return num1 - num2;
+function clear() {
+  previousOperand = "";
+  currentOperand = "";
+  operator = "";
+  result = "";
 }
 
-function multiply(num1, num2) {
-  return num1 * num2;
+function add(a, b) {
+  return a + b;
 }
 
-function divide(num1, num2) {
-  if (num1 === 0 || num2 === 0) return 0;
-  return num1 / num2;
+function substract(a, b) {
+  return a - b;
 }
 
-function operate(operator, firstOperand, secondOperand) {
+function multiply(a, b) {
+  return a * b;
+}
+
+function divide(a, b) {
+  if (a === 0 || b === 0) return 0;
+  return a / b;
+}
+
+function calculate() {
+  return (
+    Math.round(operate(operator, previousOperand, currentOperand) * 1000) / 1000
+  );
+}
+
+function operate(operator, a, b) {
+  a = Number(a);
+  b = Number(b);
+
   switch (operator) {
     case "+":
-      return add(firstOperand, secondOperand);
+      return add(a, b);
     case "-":
-      return substract(firstOperand, secondOperand);
+      return substract(a, b);
     case "*":
-      return multiply(firstOperand, secondOperand);
+      return multiply(a, b);
     case "/":
-      return divide(firstOperand, secondOperand);
+      return divide(a, b);
   }
 }
