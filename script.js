@@ -56,6 +56,10 @@ function appendOperator(sign) {
 
 function handleOperatorClick(sign) {
   if (currentOperand === "") return;
+  if (operator !== "" && currentOperand === "") {
+    appendOperator(sign);
+    return;
+  }
   if (operator === "") {
     previousOperand = currentOperand;
     currentOperand = "";
