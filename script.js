@@ -46,7 +46,6 @@ clearBtn.addEventListener("click", (e) => {
 
 function appendNumber(number) {
   if (result !== "") clear();
-
   if (number === "." && currentOperand.includes(".")) return;
   if (currentOperand === "" && number === ".") currentOperand = 0;
   currentOperand += number.toString();
@@ -67,7 +66,7 @@ function chooseOperation(sign) {
 }
 
 function updateDisplay() {
-  upperDisplay.textContent = `${previousOperand} ${operator} ${currentOperand}`;
+  upperDisplay.textContent = `${currentOperand} ${operator} ${previousOperand}`;
   lowerDisplay.textContent = `${result}`;
 }
 
