@@ -1,20 +1,20 @@
 :root {
-  --main-bg: hsl(220, 10%, 10%);
-  --display-bg: hsl(223, 6%, 18%);
+  --main-bg: hsl(222, 26%, 31%);
+  --display-bg: hsl(224, 36%, 15%);
   --display-color: hsl(0, 0%, 100%);
-  --container-bg: hsl(220, 10%, 15%);
-  --number-btn-bg: hsl(225, 5%, 30%);
-  --number-btn-color: hsl(0, 0%, 100%);
-  --number-btn-shadow: hsl(224, 6%, 20%);
-  --operator-btn-bg: hsl(140, 40%, 45%);
-  --operator-btn-color: hsl(0, 0%, 100%);
-  --operator-btn-shadow: hsl(140, 40%, 35%);
-  --equals-btn-bg: hsl(200, 70%, 40%);
+  --container-bg: hsl(223, 31%, 20%);
+  --number-btn-bg: hsl(30, 25%, 89%);
+  --number-btn-color: hsl(221, 14%, 31%);
+  --number-btn-shadow: hsl(28, 16%, 65%);
+  --operator-btn-bg: hsl(30, 25%, 89%);
+  --operator-btn-color: hsl(221, 14%, 31%);
+  --operator-btn-shadow: hsl(28, 16%, 65%);
+  --equals-btn-bg: hsl(6, 63%, 50%);
   --equals-btn-color: hsl(0, 0%, 100%);
-  --equals-btn-shadow: hsl(200, 70%, 30%);
-  --remove-btn-bg: hsl(20, 70%, 40%);
+  --equals-btn-shadow: hsl(6, 70%, 34%);
+  --remove-btn-bg: hsl(225, 21%, 49%);
   --remove-btn-color: hsl(0, 0%, 100%);
-  --remove-btn-shadow: hsl(20, 70%, 30%);
+  --remove-btn-shadow: hsl(224, 28%, 35%);
 }
 
 html {
