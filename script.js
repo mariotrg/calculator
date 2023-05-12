@@ -66,7 +66,7 @@ function chooseOperation(sign) {
 }
 
 function updateDisplay() {
-  upperDisplay.textContent = `${currentOperand} ${operator} ${previousOperand}`;
+  upperDisplay.textContent = `${previousOperand} ${operator} ${currentOperand}`;
   lowerDisplay.textContent = `${result}`;
 }
 

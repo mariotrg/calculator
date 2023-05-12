@@ -66,7 +66,7 @@ main {
 
 /* Display */
 .display {
-  height: 13rem;
+  height: 12rem;
   padding: 1.4rem;
   margin-bottom: 2.4rem;
   background-color: var(--display-bg);
@@ -76,40 +76,15 @@ main {
   overflow: hidden;
 }
 
-.upper-display,
-.lower-display {
-  scrollbar-color: var(--number-btn-bg) var(--remove-btn-bg);
-}
-.upper-display::-webkit-scrollbar,
-.lower-display::-webkit-scrollbar {
-  height: 5px;
-}
-.upper-display::-webkit-scrollbar-thumb,
-.lower-display::-webkit-scrollbar-thumb {
-  background: var(--number-btn-bg);
-}
-.upper-display::-webkit-scrollbar-track,
-.lower-display::-webkit-scrollbar-track {
-  background: var(--remove-btn-bg);
-}
-
-.upper-display,
-.lower-display {
-  overflow: hidden;
-  white-space: nowrap;
-  direction: rtl;
-  overflow-x: auto;
-}
-
 .upper-display {
   font-size: 3rem;
-  height: 4rem;
+  height: 3rem;
   margin-bottom: 1.2rem;
 }
 
 .lower-display {
   font-size: 4.4rem;
-  height: 5.4rem;
+  height: 5rem;
 }
 
 /* Buttons */
